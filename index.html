@@ -3,6 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Calculadora Letra NIF</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        input, button {
+            padding: 10px;
+            font-size: 1em;
+        }
+        button {
+            cursor: pointer;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -11,5 +37,22 @@
         <button onclick="calcularLetra()">Calcular</button>
         <div id="resultado"></div>
     </div>
+
+    <script>
+        function calcularLetra() {
+            const dni = document.getElementById('dni').value;
+            const resultado = document.getElementById('resultado');
+            
+            if(!/^\d{8}$/.test(dni)){
+                resultado.textContent = "Error: El DNI debe tener exactamente 8 dígitos.";
+                return;
+            }
+
+            const letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+            const letra = letras[dni % 23];
+            
+            resultado.textContent = `Tu NIF es: ${dni}-${letra}`;
+        }
+    </script>
 </body>
 </html>
